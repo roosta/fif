@@ -47,13 +47,14 @@ _exit_if_unsupported() {
     supported_version="0.18.0"
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
-      echo "fzf-preview.sh: Unsupported fzf version ($version), upgrade to $supported_version or higher" >&2;
+      echo "fif: Unsupported fzf version ($version), upgrade to $supported_version or higher" >&2;
       exit 1;
     fi
   else
-    echo "fzfif: fzf needs to be installed for this script to work" >&2; exit 1;
+    echo "fif: fzf needs to be installed for this script to work" >&2; exit 1;
   fi
   command -v bat >/dev/null 2>&1 || { echo "fzfif: bat needs to be installed for this script to work" >&2; exit 1; }
+  command -v rg >/dev/null 2>&1 || { echo "fzfif: rg needs to be installed for this script to work" >&2; exit 1; }
 }
 main() {
   _exit_if_unsupported
