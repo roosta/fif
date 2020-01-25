@@ -17,7 +17,7 @@
 
 # ====================================
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
 _find_in_files() {
   match=$(\rg \
