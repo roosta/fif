@@ -17,6 +17,8 @@
 
 # ====================================
 
+# TODO pass query
+
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
 _find_in_files() {
