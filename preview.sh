@@ -40,7 +40,7 @@ _fzf_preview() {
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
     bat --number \
-        ---color=always \
+        --color=always \
         --highlight-line "$linum" \
         --line-range "${start}:${end}" "$file"
     fi
