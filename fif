@@ -67,7 +67,7 @@ _exit_if_unsupported() {
   else
     echo "fif: bat needs to be installed for this script to work" >&2; exit 1;
   fi
-  command -v rg >/dev/null 2>&1 || { echo "fzfif: rg needs to be installed for this script to work" >&2; exit 1; }
+  command -v rg >/dev/null 2>&1 || { echo "fif: rg needs to be installed for this script to work" >&2; exit 1; }
 }
 main() {
   _exit_if_unsupported
