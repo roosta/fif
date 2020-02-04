@@ -17,7 +17,8 @@
 
 # ====================================
 
-# TODO pass query
+# TODO pass path
+# TODO ag and rg compat
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
