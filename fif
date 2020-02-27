@@ -23,6 +23,13 @@
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
 _find_in_files() {
+  local location
+  if [ -d "$1" ] || [ -f "$1" ]; then
+    location="$1"
+  else
+    location="."
+  fi
+
   match=$(\rg \
             --smart-case \
             --color "always" \
@@ -72,7 +79,7 @@ _exit_if_unsupported() {
 }
 main() {
   _exit_if_unsupported
-  _find_in_files
+  _find_in_files "$@"
 }
 
 main "$@"
