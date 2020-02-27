@@ -22,7 +22,25 @@
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
-_find_in_files() {
+fif::rg_cmd() {
+  \rg \
+    --smart-case \
+    --color "always" \
+    --line-number \
+    --hidden \
+    --no-heading .
+}
+
+fif::fzf_cmd() {
+  fzf -d ":" \
+      --ansi \
+      --nth "2.." \
+      --preview-window=up \
+      --with-nth "1,3.." \
+      --preview="$CURRENT_DIR/preview.sh {}"
+}
+
+fif::find_in_files() {
   local location
   if [ -d "$1" ] || [ -f "$1" ]; then
     location="$1"
@@ -30,18 +48,7 @@ _find_in_files() {
     location="."
   fi
 
-  match=$(\rg \
-            --smart-case \
-            --color "always" \
-            --line-number \
-            --hidden \
-            --no-heading . | \
-            fzf -d ":" \
-                --ansi \
-                --nth "2.." \
-                --preview-window=up \
-                --with-nth "1,3.." \
-                --preview="$CURRENT_DIR/preview.sh {}") &&
+  match=$(fif::rg_cmd | fif::fzf_cmd) &&
 
     linum=$(echo "$match" | cut -d':' -f2) &&
     file=$(echo "$match" | cut -d':' -f1) &&
@@ -49,7 +56,7 @@ _find_in_files() {
     ${EDITOR:-vim} +"$linum" "$file"
 }
 
-_exit_if_unsupported() {
+fif::exit_if_unsupported() {
   local version version_only_digits supported_version supported_version_only_digits
   if hash fzf 2>/dev/null; then
     version=$(fzf --version | awk '{print $1}')
@@ -77,9 +84,10 @@ _exit_if_unsupported() {
   fi
   command -v rg >/dev/null 2>&1 || { echo "fif: rg needs to be installed for this script to work" >&2; exit 1; }
 }
+
 main() {
-  _exit_if_unsupported
-  _find_in_files "$@"
+  fif::exit_if_unsupported
+  fif::find_in_files "$@"
 }
 
 main "$@"
