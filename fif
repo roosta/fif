@@ -42,18 +42,22 @@ fif::fzf_cmd() {
 
 fif::find_in_files() {
   local location
-  if [ -d "$1" ] || [ -f "$1" ]; then
-    location="$1"
+  location="$1"
+  if [ -d "$1" ]; then
+    (
+      cd "$location" &&
+        match=$(fif::rg_cmd | fif::fzf_cmd) &&
+        linum=$(echo "$match" | cut -d':' -f2) &&
+        file=$(echo "$match" | cut -d':' -f1) &&
+        ${EDITOR:-vim} +"$linum" "$file"
+    )
   else
-    location="."
+    match=$(fif::rg_cmd | fif::fzf_cmd) &&
+      linum=$(echo "$match" | cut -d':' -f2) &&
+      file=$(echo "$match" | cut -d':' -f1) &&
+      ${EDITOR:-vim} +"$linum" "$file"
   fi
 
-  match=$(fif::rg_cmd | fif::fzf_cmd) &&
-
-    linum=$(echo "$match" | cut -d':' -f2) &&
-    file=$(echo "$match" | cut -d':' -f1) &&
-
-    ${EDITOR:-vim} +"$linum" "$file"
 }
 
 fif::exit_if_unsupported() {
