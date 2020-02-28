@@ -21,6 +21,14 @@
 # TODO ag and rg compat
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+FIF_FZF_DEFAULT_OPTS="
+$FZF_DEFAULT_OPTS
+--ansi
+--bind='ctrl-s:toggle-sort'
+--bind='?:toggle-preview'
+--preview-window=up
+$FIF_FZF_DEFAULT_OPTS
+"
 
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
@@ -37,12 +45,15 @@ fif::cat_cmd() {
 }
 
 fif::fzf_cmd() {
-  fzf -d ":" \
-      --ansi \
-      --nth "2.." \
-      --preview-window=up \
-      --with-nth "1,3.." \
-      --preview="$CURRENT_DIR/preview.sh {}"
+  local options
+  options="
+      $FIF_FZF_DEFAULT_OPTS
+      -d \":\"
+      --nth \"2..\"
+      --with-nth \"1,3..\"
+      --preview=\"$CURRENT_DIR/preview.sh {}\"
+    "
+  FZF_DEFAULT_OPTS="$options" fzf
 }
 
 fif::find_in_files() {
