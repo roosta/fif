@@ -23,6 +23,7 @@
 # TODO Add highlight fallbacks
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+
 FIF_FZF_DEFAULT_OPTS="
 $FZF_DEFAULT_OPTS
 --ansi
@@ -30,8 +31,8 @@ $FZF_DEFAULT_OPTS
 --bind='?:toggle-preview'
 --preview-window=up
 --with-nth '1,3..'
-$FIF_FZF_DEFAULT_OPTS
 "
+
 FIF_GREP_DEFAULT_OPTS=(
   "--color=always"
   "--exclude-dir={.git,.svn,CVS}"
@@ -67,14 +68,7 @@ fif::cat_cmd() {
 }
 
 fif::fzf_cmd() {
-  local opts
-  opts="
-      $FIF_FZF_DEFAULT_OPTS
-      -d \":\"
-      --nth \"2..\"
-      --preview=\"$CURRENT_DIR/preview.sh {}\"
-    "
-  FZF_DEFAULT_OPTS="$opts" fzf
+  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
 }
 
 fif::find_in_files() {
