@@ -32,6 +32,12 @@ $FZF_DEFAULT_OPTS
 --with-nth '1,3..'
 $FIF_FZF_DEFAULT_OPTS
 "
+FIF_GREP_DEFAULT_OPTS=(
+  "--color=always"
+  "--exclude-dir={.git,.svn,CVS}"
+)
+
+FIF_GREP_COLORS="mt=0;49;97:ln=0;49;93:fn=0;49;94:se=0;49;37"
 
 FIF_RG_DEFAULT_OPTS=(
   --hidden
@@ -55,7 +61,7 @@ fif::cat_cmd() {
   elif hash ag 2>/dev/null; then
     \ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
   else
-    \grep --exclude-dir={.git,.svn,CVS} -r -n "" -- * .[^.]*
+    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" -r -n "" -- * .[^.]*
   fi
 }
 
