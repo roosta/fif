@@ -32,27 +32,29 @@ $FZF_DEFAULT_OPTS
 $FIF_FZF_DEFAULT_OPTS
 "
 
+FIF_RG_DEFAULT_OPTS=(
+  --hidden
+  --color always
+  --colors 'match:none'
+  --colors 'line:none'
+  --colors 'path:fg:black'
+  --colors 'path:style:intense'
+)
+
+FIF_AG_DEFAULT_OPTS=(
+  --hidden
+  --color
+  --color-path '2;49'
+  --color-match '0;49'
+)
+
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
-    \rg \
-      --line-number \
-      --hidden \
-      --color always \
-      --colors 'match:none' \
-      --colors 'line:none' \
-      --colors 'path:fg:black' \
-      --colors 'path:style:intense' \
-      --no-heading .
-  elif hash ag 2>/dev/null; then
-    \ag \
-      --line-number \
-      --hidden \
-      --color \
-      --color-path '2;49' \
-      --color-match '0;49' \
-      --noheading .
+    \rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
+  elif hash zxc 2>/dev/null; then
+    \ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
   else
-    grep
+    \grep -r -n "" -- *
   fi
 }
 
