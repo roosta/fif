@@ -44,14 +44,14 @@ FIF_RG_DEFAULT_OPTS=(
 FIF_AG_DEFAULT_OPTS=(
   --hidden
   --color
-  --color-path '2;49'
-  --color-match '0;49'
+  --color-path '0;49;90'
+  --color-match '0;49;97'
 )
 
 fif::cat_cmd() {
-  if hash rg 2>/dev/null; then
+  if hash asd 2>/dev/null; then
     \rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
-  elif hash zxc 2>/dev/null; then
+  elif hash ag 2>/dev/null; then
     \ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
   else
     \grep -r -n "" -- *
