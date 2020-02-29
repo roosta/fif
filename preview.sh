@@ -24,7 +24,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-_fzf_preview() {
+fif::preview() {
   local file linum total half_lines start end total
   match="$1"
   file=$(echo "$match" | cut -d':' -f1)
@@ -51,7 +51,7 @@ main() {
     echo "preview.sh takes exactly one argument" >&2;
     exit 1;
   else
-    _fzf_preview "$@"
+    fif::preview "$@"
   fi
 }
 
