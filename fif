@@ -55,7 +55,7 @@ fif::cat_cmd() {
   elif hash ag 2>/dev/null; then
     \ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
   else
-    \grep -r -n "" -- *
+    \grep --exclude-dir={.git,.svn,CVS} -r -n "" -- * .[^.]*
   fi
 }
 
