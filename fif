@@ -37,29 +37,30 @@ FIF_GREP_DEFAULT_OPTS=(
   "--exclude-dir={.git,.svn,CVS}"
 )
 
-FIF_GREP_COLORS="mt=0;49;97:ln=0;49;93:fn=0;49;94:se=0;49;37"
+FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
 
 FIF_RG_DEFAULT_OPTS=(
   --hidden
   --color always
   --colors 'match:none'
   --colors 'line:none'
-  --colors 'path:fg:black'
-  --colors 'path:style:intense'
+  --colors 'path:fg:blue'
+  --colors 'column:fg:yellow'
 )
 
 FIF_AG_DEFAULT_OPTS=(
   --hidden
   --color
-  --color-path '0;49;90'
-  --color-match '0;49;97'
+  --color-path 34
+  --color-match 97
+  --color-line-number 33
 )
 
 fif::cat_cmd() {
-  if hash asd 2>/dev/null; then
-    \rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
+  if hash rg 2>/dev/null; then
+    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
   elif hash ag 2>/dev/null; then
-    \ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
+    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
   else
     GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" -r -n "" -- * .[^.]*
   fi
