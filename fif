@@ -114,10 +114,7 @@ fif::exit_if_unsupported() {
       echo "fif: Unsupported bat version ($version), upgrade to $supported_version or higher" >&2;
       exit 1;
     fi
-  else
-    echo "fif: bat needs to be installed for this script to work" >&2; exit 1;
   fi
-  # command -v rg >/dev/null 2>&1 || { echo "fif: rg needs to be installed for this script to work" >&2; exit 1; }
 }
 
 main() {
