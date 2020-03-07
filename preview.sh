@@ -39,6 +39,14 @@ fif::preview() {
     [[ $(( linum + half_lines )) -gt $total ]] && end=$total || end=$(( linum + half_lines ))
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
+    # highlight \
+    #   --out-format=ansi \
+    #   --line-range="${start}-${end}" \
+    #   --line-numbers \
+    #   --style=srcery \
+    #   --force \
+    #   "$file"
+
     bat --number \
         --color=always \
         --highlight-line "$linum" \
