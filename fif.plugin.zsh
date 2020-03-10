@@ -119,9 +119,10 @@ fif::exit_if_unsupported() {
   fi
 }
 
-main() {
+fif() {
   fif::exit_if_unsupported
   fif::find_in_files "$@"
 }
 
-main "$@"
+# shellcheck disable=SC2139
+alias "${fif_alias:-fif}"='fif'
