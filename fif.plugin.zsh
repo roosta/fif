@@ -57,6 +57,10 @@ FIF_AG_DEFAULT_OPTS=(
   --color-line-number 33
 )
 
+# https://github.com/wfxr/forgit/blob/4eb0832e535082c36a1e07de2570d3385fb4f6fb/forgit.plugin.zsh#L2
+fif::warn() { printf "%b[Warn]%b %s\n" '\e[0;33m' '\e[0m' "$@" >&2; }
+fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
+
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
     rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
@@ -91,7 +95,7 @@ fif::find_in_files() {
 
 }
 
-fif::exit_if_unsupported() {
+fif::check_supported() {
   local version version_only_digits supported_version supported_version_only_digits
   if hash fzf 2>/dev/null; then
     version=$(fzf --version | awk '{print $1}')
@@ -99,11 +103,10 @@ fif::exit_if_unsupported() {
     supported_version="0.18.0"
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
-      echo "fif: Unsupported fzf version ($version), upgrade to $supported_version or higher" >&2;
-      exit 1;
+      fif::warn "Unsupported fzf version ($version), upgrade to $supported_version or higher";
     fi
   else
-    echo "fif: fzf needs to be installed for this script to work" >&2; exit 1;
+    fif::warn "fzf needs to be installed for fif to work";
   fi
   if hash bat 2>/dev/null; then
     version=$(bat --version)
@@ -111,16 +114,15 @@ fif::exit_if_unsupported() {
     supported_version="0.10.0"
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
-      echo "fif: Unsupported bat version ($version), upgrade to $supported_version or higher" >&2;
-      exit 1;
+      fif::warn "Unsupported bat version ($version), upgrade to $supported_version or higher";
     fi
   else
-    echo "fif: bat needs to be installed for this script to work" >&2; exit 1;
+    fif::warn "bat needs to be installed for fif preview to work";
   fi
 }
 
 fif() {
-  fif::exit_if_unsupported
+  fif::check_supported
   fif::find_in_files "$@"
 }
 
