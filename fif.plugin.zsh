@@ -22,7 +22,7 @@
 # DONE ag and rg compat
 # TODO Add highlight fallbacks
 
-CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 FIF_FZF_DEFAULT_OPTS="
 $FZF_DEFAULT_OPTS
