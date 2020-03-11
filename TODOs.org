@@ -1,1 +1,7 @@
-* [[https://stackoverflow.com/questions/10375689/how-can-i-grep-hidden-files#10375711][How can I grep hidden files? - Stack Overflow]]
+* Resources
+** [[https://stackoverflow.com/questions/10375689/how-can-i-grep-hidden-files#10375711][How can I grep hidden files? - Stack Overflow]]
+* DONE pass path
+* TODO Pass file
+* DONE ag and rg compat
+* TODO Add highlight fallbacks
+* TODO Fall back to cat
