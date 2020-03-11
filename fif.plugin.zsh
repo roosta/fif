@@ -79,13 +79,13 @@ fif::find_in_files() {
         match=$(fif::cat_cmd | fif::fzf_cmd) &&
         linum=$(echo "$match" | cut -d':' -f2) &&
         file=$(echo "$match" | cut -d':' -f1) &&
-        ${EDITOR:-vim} +"$linum" "$file"
+        eval "${EDITOR:-vim}" "+${linum}" "$file"
     )
   else
     match=$(fif::cat_cmd | fif::fzf_cmd) &&
       linum=$(echo "$match" | cut -d':' -f2) &&
       file=$(echo "$match" | cut -d':' -f1) &&
-      ${EDITOR:-vim} +"$linum" "$file"
+      eval "${EDITOR:-vim}" "+${linum}" "$file"
   fi
 
 }
