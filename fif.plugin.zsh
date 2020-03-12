@@ -90,6 +90,11 @@ fif::find_in_files() {
 
 }
 
+fif::exit_or_return() {
+  [[ "$0" = "${BASH_SOURCE[0]}" ]] && exit 1 || return 1
+}
+
+# Check if supported version of dependencies are installed, warn otherwise.
 fif::check_supported() {
   local version version_only_digits supported_version supported_version_only_digits
   if hash fzf 2>/dev/null; then
@@ -99,27 +104,31 @@ fif::check_supported() {
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
       fif::warn "Unsupported fzf version ($version), upgrade to $supported_version or higher";
+      fif::exit_or_return
     fi
   else
     fif::warn "fzf needs to be installed for fif to work";
+    fif::exit_or_return
   fi
   if hash bat 2>/dev/null; then
     version=$(bat --version)
     version_only_digits=$(echo "$version" | tr -dC '[:digit:]')
-    supported_version="0.10.0"
+    supported_version="0.50.0"
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
       fif::warn "Unsupported bat version ($version), upgrade to $supported_version or higher";
+      fif::exit_or_return
     fi
   else
     fif::warn "bat needs to be installed for fif preview to work";
+    fif::exit_or_return
   fi
 }
 
-fif() {
+fif::main() {
   fif::check_supported
   fif::find_in_files "$@"
 }
 
 # shellcheck disable=SC2139
-alias "${fif_alias:-fif}"='fif'
+alias "${fif_alias:-fif}"='fif::main'
