@@ -5,3 +5,4 @@
 * DONE ag and rg compat
 * TODO Add highlight fallbacks
 * TODO Fall back to cat
+* TODO Fix grep .git folder

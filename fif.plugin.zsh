@@ -58,11 +58,11 @@ fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
 
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
-    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading .
+    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading "^" "$location"
   elif hash ag 2>/dev/null; then
-    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading .
+    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading "^" "$location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" -r -n "" -- *
+    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" -r -n "^" "$location"
   fi
 }
 
@@ -72,21 +72,15 @@ fif::fzf_cmd() {
 
 fif::find_in_files() {
   local location
-  location="$1"
-  if [ -d "$1" ]; then
-    (
-      cd "$location" &&
-        match=$(fif::cat_cmd | fif::fzf_cmd) &&
-        linum=$(echo "$match" | cut -d':' -f2) &&
-        file=$(echo "$match" | cut -d':' -f1) &&
-        eval "${EDITOR:-vim}" "+${linum}" "$file"
-    )
+  if [ -d "$1" ] || [ -f "$1" ]; then
+    location="$1"
   else
-    match=$(fif::cat_cmd | fif::fzf_cmd) &&
-      linum=$(echo "$match" | cut -d':' -f2) &&
-      file=$(echo "$match" | cut -d':' -f1) &&
-      eval "${EDITOR:-vim}" "+${linum}" "$file"
+    location="."
   fi
+  match=$(fif::cat_cmd "$location" | fif::fzf_cmd) &&
+    linum=$(echo "$match" | cut -d':' -f2) &&
+    file=$(echo "$match" | cut -d':' -f1) &&
+    eval "${EDITOR:-vim}" "+${linum}" "$file"
 
 }
 
@@ -113,7 +107,7 @@ fif::check_supported() {
   if hash bat 2>/dev/null; then
     version=$(bat --version)
     version_only_digits=$(echo "$version" | tr -dC '[:digit:]')
-    supported_version="0.50.0"
+    supported_version="0.10.0"
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
       fif::warn "Unsupported bat version ($version), upgrade to $supported_version or higher";
