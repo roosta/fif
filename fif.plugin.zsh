@@ -62,7 +62,7 @@ fif::cat_cmd() {
   elif hash ag 2>/dev/null; then
     ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading "^" "$location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" -r -n "^" "$location"
+    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" --recursive --line-number "^" "$location"
   fi
 }
 
