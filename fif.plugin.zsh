@@ -25,7 +25,6 @@ $FZF_DEFAULT_OPTS
 --bind='ctrl-s:toggle-sort'
 --bind='?:toggle-preview'
 --preview-window=up
---with-nth '1,3..'
 "
 
 FIF_GREP_DEFAULT_OPTS=(
@@ -39,14 +38,13 @@ FIF_RG_DEFAULT_OPTS=(
   --hidden
   --color always
   --colors 'match:none'
-  --colors 'line:none'
   --colors 'path:fg:blue'
-  --colors 'column:fg:yellow'
+  --colors 'line:fg:yellow'
 )
 
 FIF_AG_DEFAULT_OPTS=(
   --hidden
-  --color
+  --color always
   --color-path 34
   --color-match 97
   --color-line-number 33
@@ -58,16 +56,20 @@ fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
 
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
-    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading "^" "$location"
+    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading --with-filename "^" "$location"
   elif hash ag 2>/dev/null; then
-    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading "^" "$location"
+    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading --filename "^" "$location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" --recursive --line-number "^" "$location"
+    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" --recursive --line-number --with-filename "^" "$location"
   fi
 }
 
-fif::fzf_cmd() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
+fif::fzf_file() {
+  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
+}
+
+fif::fzf_directory() {
+  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --nth "3.." --preview="$CURRENT_DIR/preview.sh {}"
 }
 
 # Check if supported version of dependencies are installed, warn otherwise.
@@ -102,18 +104,26 @@ fif::check_supported() {
 }
 
 fif::find_in_files() {
-  local location
+  local location match linum file
   fif::check_supported || return 1
-  if [ -d "$1" ] || [ -f "$1" ]; then
+  if [ -d "$1" ]; then
     location="$1"
+    match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
+      linum=$(echo "$match" | cut -d':' -f2) &&
+      file=$(echo "$match" | cut -d':' -f1) &&
+      eval "${EDITOR:-vim}" "+${linum}" "$file"
+  elif [ -f "$1" ]; then
+    location="$1"
+    match=$(fif::cat_cmd "$location" | fif::fzf_file) &&
+      linum=$(echo "$match" | cut -d':' -f1) &&
+      eval "${EDITOR:-vim}" "+${linum}" "$location"
   else
     location="."
+    match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
+      linum=$(echo "$match" | cut -d':' -f2) &&
+      file=$(echo "$match" | cut -d':' -f1) &&
+      eval "${EDITOR:-vim}" "+${linum}" "$file"
   fi
-  match=$(fif::cat_cmd "$location" | fif::fzf_cmd) &&
-    linum=$(echo "$match" | cut -d':' -f2) &&
-    file=$(echo "$match" | cut -d':' -f1) &&
-    eval "${EDITOR:-vim}" "+${linum}" "$file"
-
 }
 
 # shellcheck disable=SC2139
