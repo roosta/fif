@@ -6,3 +6,4 @@
 * TODO Add highlight fallbacks
 * TODO Fall back to cat
 * TODO Fix grep .git folder
+* TODO Test that overriding options work
