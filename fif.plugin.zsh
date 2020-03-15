@@ -27,9 +27,10 @@ $FZF_DEFAULT_OPTS
 --preview-window=up
 "
 
+# shellcheck disable=SC2191
 FIF_GREP_DEFAULT_OPTS=(
-  "--color=always"
-  "--exclude-dir={.git,.svn,CVS}"
+  --color=always
+  --exclude-dir={.git,.svn,CVS}
 )
 
 FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
