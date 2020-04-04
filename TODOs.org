@@ -1,5 +1,7 @@
 * Resources
 ** [[https://stackoverflow.com/questions/10375689/how-can-i-grep-hidden-files#10375711][How can I grep hidden files? - Stack Overflow]]
+** [[https://asciinema.org/docs/usage][Usage - asciinema]]
+** [[https://github.com/wfxr/forgit][wfxr/forgit: A utility tool powered by fzf for using git interactively.]]
 * DONE pass path
 * TODO Pass file
 * DONE ag and rg compat
