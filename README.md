@@ -16,11 +16,11 @@ highlighted preview with a surrounding context.
 For file concatenation either
 [rg](https://github.com/BurntSushi/ripgrep) or
 [ag](https://github.com/ggreer/the_silver_searcher) is optionally
-required, and fif will fall back to grep if none of those are present. I
+required, and fif will fall back to `grep` if none of those are present. I
 recommend using [rg](https://github.com/BurntSushi/ripgrep) or
 [ag](https://github.com/ggreer/the_silver_searcher) since those two
 respect things like git ignore and hidden files. Most options passed to
-these tools are configurable. More on that below.
+these tools are configurable. [More on that below](#configuration).
 
 ### Preview
 
@@ -87,13 +87,16 @@ fif ~/some-file.txt
 
 ### Options
 
-<details>
-<summary><strong><code>FIF_ALIAS</code></strong></summary>
-    Change the command name of fif via this environment variable.
-    ```bash
-    export FIF_ALIAS
-    # re-source shell
-    ```
+To use these options export environment variables and source fif.plugin.zsh
+
+<details> <summary><strong><code>FIF_ALIAS</code></strong></summary>
+Change the command name of fif via this environment variable.
+
+```bash
+export FIF_ALIAS="my-alias"
+source ~/fif-location/fif.plugin.zsh
+my-alias ~/file.txt
+```
 </details>
 
 <details>
@@ -101,11 +104,88 @@ fif ~/some-file.txt
     tmptmptmp
 </details>
 
+<details>
+<summary><strong><code>FIF_FZF_DEFAULT_OPTS</code></strong></summary>
+
+Environment that contains the default options when using `fzf` via
+`fif`. By default fif uses these options:
+```
+--ansi
+--bind='ctrl-s:toggle-sort'
+--bind='?:toggle-preview'
+--preview-window=up
+```
+in combination with what's defined in `FZF_DEFAULT_OPTS`. (No need to
+repeat the options already defined in FZF_DEFAULT_OPTS)
+</details>
+
+
+<details>
+<summary><strong><code>FIF_GREP_DEFAULT_OPTS</code></strong></summary>
+Environment variable storing an array of grep options. Default is:
+
+``` bash
+FIF_GREP_DEFAULT_OPTS=(
+  --color=always
+  --exclude-dir={.git,.svn,CVS}
+)
+```
+</details>
+
+<details>
+<summary><strong><code>FIF_GREP_COLORS</code></strong></summary>
+Colors used with grep, default is:
+
+``` bash
+FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
+```
+This will color filenames(fn) with blue, line number(ln) as yellow,
+line contents(mt) as bright white, and separators(se) as white
+</details>
+
+<details>
+<summary><strong><code>FIF_RG_DEFAULT_OPTS</code></strong></summary>
+Environment variable storing an array of rg options. Defaults:
+
+``` bash
+FIF_RG_DEFAULT_OPTS=(
+  --hidden
+  --color always
+  --colors 'match:none'
+  --colors 'path:fg:blue'
+  --colors 'line:fg:yellow'
+)
+```
+</details>
+
+<details>
+<summary><strong><code>FIF_AG_DEFAULT_OPTS</code></strong></summary>
+Environment variable storing an array of ag options. Defaults:
+
+``` bash
+FIF_AG_DEFAULT_OPTS=(
+  --hidden
+  --color always
+  --color-path 34
+  --color-match 97
+  --color-line-number 33
+)
+
+```
+
+Colors used are blue for path, bright white for match, and yellow line
+number
+
+</details>
+
 ## Attribution
 
-Forgit
-------
 
-Used [forgit](https://github.com/wfxr/forgit) as an example on how to do
-zsh plugins and how to handle options. Also took some pointer from its
+### [Forgit](https://github.com/wfxr/forgit)
+
+Used as an example on how to do zsh plugins and how to handle
+options. Also took some pointer from its
 [README](https://github.com/wfxr/forgit/blob/master/README.md).
+
+### [Enhancd](https://github.com/b4b4r07/enhancd)
+Used for reference, and pointers
