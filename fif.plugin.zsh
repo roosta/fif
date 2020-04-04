@@ -127,5 +127,4 @@ fif::find_in_files() {
   fi
 }
 
-# shellcheck disable=SC2139
-alias "${fif_alias:-fif}"='fif::find_in_files'
+eval "alias ${FIF_ALIAS:-fif}=fif::find_in_files"
