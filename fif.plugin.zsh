@@ -19,12 +19,13 @@
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
-FIF_FZF_DEFAULT_OPTS="
+export FIF_FZF_DEFAULT_OPTS="
 $FZF_DEFAULT_OPTS
 --ansi
 --bind='ctrl-s:toggle-sort'
 --bind='?:toggle-preview'
 --preview-window=up
+$FIF_FZF_DEFAULT_OPTS
 "
 
 # shellcheck disable=SC2191
