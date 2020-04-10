@@ -127,4 +127,4 @@ fif::find_in_files() {
   fi
 }
 
-eval "alias ${FIF_ALIAS:-fif}=fif::find_in_files"
+eval "alias ${fif_alias:-fif}=fif::find_in_files"
