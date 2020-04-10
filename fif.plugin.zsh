@@ -34,7 +34,7 @@ FIF_GREP_DEFAULT_OPTS=(
   --exclude-dir={.git,.svn,CVS}
 )
 
-FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
+export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 FIF_RG_DEFAULT_OPTS=(
   --hidden
