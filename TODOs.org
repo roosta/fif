@@ -7,4 +7,4 @@
 * DONE Test that overriding options work
 * TODO add query arg
 * TODO Add help commandline arg
-* TODO Add cat fallback to pygmentize coloring when it doesn't understand the filetype
+* DONE Add cat fallback to pygmentize coloring when it doesn't understand the filetype

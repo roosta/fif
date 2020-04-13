@@ -37,7 +37,7 @@ fif::pygmentize() {
   local file linum context hl
   file="$1"
   linum="$2"
-  color=$(pygmentize "$file")
+  color=$(pygmentize -g "$file")
   hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' <<< "$color")
   context=$(sed -n "${start},${end}p" <<< "$hl")
   echo "$context"
@@ -58,13 +58,13 @@ fif::preview() {
     [[ $(( linum + half_lines )) -gt $total ]] && end=$total || end=$(( linum + half_lines ))
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
-    if hash bat 2>/dev/null; then
+    if hash ads 2>/dev/null; then
       out=$(bat \
               --number \
               --color=always \
               --highlight-line "$linum" \
               --line-range "${start}:${end}" "$file")
-    elif hash highlight 2>/dev/null; then
+    elif hash asd 2>/dev/null; then
       out=$(highlight \
               --out-format=ansi \
               --line-range="${start}-${end}" \
