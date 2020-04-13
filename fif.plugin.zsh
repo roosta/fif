@@ -18,6 +18,7 @@
 # ====================================
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+_FIF_VERSION="0.1.0"
 
 export FIF_FZF_DEFAULT_OPTS="
 $FZF_DEFAULT_OPTS
