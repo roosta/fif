@@ -8,3 +8,5 @@
 * TODO add query arg
 * TODO Add help commandline arg
 * DONE Add cat fallback to pygmentize coloring when it doesn't understand the filetype
+* TODO Editor cmd
+* TODO Help cmd
