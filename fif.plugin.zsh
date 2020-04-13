@@ -32,12 +32,10 @@ $FIF_FZF_DEFAULT_OPTS
 # Setup default grep opts
 if [ ${#FIF_GREP_DEFAULT_OPTS[@]} -eq 0 ]; then
   # shellcheck disable=SC2191
-  _FIF_GREP_OPTS=(
+  FIF_GREP_DEFAULT_OPTS=(
     --color=always
     --exclude-dir={.git,.svn,CVS}
   )
-else
-  _FIF_GREP_OPTS=("${FIF_GREP_DEFAULT_OPTS[@]}")
 fi
 
 # Check out the Environment section in the grep manual for an overview
@@ -69,7 +67,7 @@ fif::cat_cmd() {
   elif hash ag 2>/dev/null; then
     ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading --filename "^" "$location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS grep "${_FIF_GREP_OPTS[@]}" --recursive --line-number --with-filename "^" "$location"
+    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_DEFAULT_OPTS[@]}" --recursive --line-number --with-filename "^" "$location"
   fi
 }
 
