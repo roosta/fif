@@ -1,9 +1,10 @@
 * DONE pass path
-* TODO Pass file
+* DONE Pass file
 * DONE ag and rg compat
-* TODO Add highlight fallbacks
-* TODO Fall back to cat
-* TODO Fix grep .git folder
-* TODO Test that overriding options work
+* DONE Add highlight fallbacks
+* DONE Fall back to cat
+* DONE Fix grep .git folder
+* DONE Test that overriding options work
 * TODO add query arg
 * TODO Add help commandline arg
+* TODO Add cat fallback to pygmentize coloring when it doesn't understand the filetype
