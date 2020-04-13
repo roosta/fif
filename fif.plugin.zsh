@@ -55,7 +55,7 @@ fi
 if [ ${#FIF_AG_OPTS[@]} -eq 0 ]; then
   FIF_AG_OPTS=(
     --hidden
-    --color always
+    --color
     --color-path 34
     --color-match 97
     --color-line-number 33

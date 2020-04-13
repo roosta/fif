@@ -163,13 +163,13 @@ FIF_RG_OPTS=(
 </details>
 
 <details>
-<summary><strong><code>FIF_AG_DEFAULT_OPTS</code></strong></summary>
+<summary><strong><code>FIF_AG_OPTS</code></strong></summary>
 Environment variable storing an array of ag options. Defaults:
 
 ``` bash
 FIF_AG_DEFAULT_OPTS=(
   --hidden
-  --color always
+  --color
   --color-path 34
   --color-match 97
   --color-line-number 33
