@@ -26,8 +26,12 @@ these tools are configurable. [More on that below](#configuration).
 
 [bat](https://github.com/sharkdp/bat) version
 [0.10.0](https://github.com/sharkdp/bat/releases/tag/v0.10.0) or above
-is optionally require to syntax highlight the preview window, if bat
-isn\'t present fif will fall back...
+is optionally required to syntax highlight the preview window, if
+`bat` isn't present `fif` will fall back to
+[highlight](http://www.andre-simon.de/doku/highlight/highlight.php),
+then [python-pygments](https://pygments.org/), and lastly `cat` with
+no colors other than the highlighted line (inverted). I warmly
+recommend `bat`, as its fast and does a good job highlighting
 
 ## Installation
 
