@@ -58,13 +58,13 @@ fif::preview() {
     [[ $(( linum + half_lines )) -gt $total ]] && end=$total || end=$(( linum + half_lines ))
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
-    if hash ads 2>/dev/null; then
+    if hash bat 2>/dev/null; then
       out=$(bat \
               --number \
               --color=always \
               --highlight-line "$linum" \
               --line-range "${start}:${end}" "$file")
-    elif hash asd 2>/dev/null; then
+    elif hash highlight 2>/dev/null; then
       out=$(highlight \
               --out-format=ansi \
               --line-range="${start}-${end}" \
