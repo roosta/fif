@@ -109,9 +109,6 @@ fif::check_supported() {
       fif::warn "fif: Unsupported bat version ($version), upgrade to $supported_version or higher";
       return 1
     fi
-  else
-    fif::warn "fif: bat needs to be installed for preview.sh to work";
-    return 1
   fi
 }
 
