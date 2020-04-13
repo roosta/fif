@@ -52,13 +52,15 @@ if [ ${#FIF_RG_OPTS[@]} -eq 0 ]; then
   )
 fi
 
-FIF_AG_DEFAULT_OPTS=(
-  --hidden
-  --color always
-  --color-path 34
-  --color-match 97
-  --color-line-number 33
-)
+if [ ${#FIF_AG_OPTS[@]} -eq 0 ]; then
+  FIF_AG_OPTS=(
+    --hidden
+    --color always
+    --color-path 34
+    --color-match 97
+    --color-line-number 33
+  )
+fi
 
 # https://github.com/wfxr/forgit/blob/4eb0832e535082c36a1e07de2570d3385fb4f6fb/forgit.plugin.zsh#L2
 fif::warn() { printf "%b[Warn]%b %s\n" '\e[0;33m' '\e[0m' "$@" >&2; }
@@ -68,7 +70,7 @@ fif::cat_cmd() {
   if hash rg 2>/dev/null; then
     rg "${FIF_RG_OPTS[@]}" --line-number --no-heading --with-filename "^" "$location"
   elif hash ag 2>/dev/null; then
-    ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading --filename "^" "$location"
+    ag "${FIF_AG_OPTS[@]}" --line-number --noheading --filename "^" "$location"
   else
     GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_OPTS[@]}" --recursive --line-number --with-filename "^" "$location"
   fi
