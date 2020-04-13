@@ -41,13 +41,16 @@ fi
 # Check out the Environment section in the grep manual for an overview
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
-FIF_RG_DEFAULT_OPTS=(
-  --hidden
-  --color always
-  --colors 'match:none'
-  --colors 'path:fg:blue'
-  --colors 'line:fg:yellow'
-)
+# Check for rg default opts, or assign
+if [ ${#FIF_RG_DEFAULT_OPTS[@]} -eq 0 ]; then
+  FIF_RG_DEFAULT_OPTS=(
+    --hidden
+    --color always
+    --colors 'match:none'
+    --colors 'path:fg:blue'
+    --colors 'line:fg:yellow'
+  )
+fi
 
 FIF_AG_DEFAULT_OPTS=(
   --hidden
