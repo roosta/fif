@@ -123,11 +123,11 @@ repeat the options already defined in FZF_DEFAULT_OPTS)
 
 
 <details>
-<summary><strong><code>FIF_GREP_DEFAULT_OPTS</code></strong></summary>
+<summary><strong><code>FIF_GREP_OPTS</code></strong></summary>
 Environment variable storing an array of grep options. Default is:
 
 ``` bash
-FIF_GREP_DEFAULT_OPTS=(
+FIF_GREP_OPTS=(
   --color=always
   --exclude-dir={.git,.svn,CVS}
 )
