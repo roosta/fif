@@ -143,6 +143,8 @@ FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
 ```
 This will color filenames(fn) with blue, line number(ln) as yellow,
 line contents(mt) as bright white, and separators(se) as white
+
+Check out the Environment section in the grep manual for an overview.
 </details>
 
 <details>
