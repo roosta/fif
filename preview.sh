@@ -25,7 +25,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 fif::preview() {
-  local file linum total half_lines start end total
+  local file linum total half_lines start end total out
   match="$1"
   file=$(echo "$match" | cut -d':' -f1)
   linum=$(echo "$match" | cut -d':' -f2)
@@ -39,19 +39,24 @@ fif::preview() {
     [[ $(( linum + half_lines )) -gt $total ]] && end=$total || end=$(( linum + half_lines ))
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
-    # highlight \
-    #   --out-format=ansi \
-    #   --line-range="${start}-${end}" \
-    #   --line-numbers \
-    #   --style=srcery \
-    #   --force \
-    #   "$file"
-
-    bat --number \
-        --color=always \
-        --highlight-line "$linum" \
-        --line-range "${start}:${end}" "$file"
+    if hash bat 2>/dev/null; then
+      out=$(bat \
+              --number \
+              --color=always \
+              --highlight-line "$linum" \
+              --line-range "${start}:${end}" "$file")
+    elif hash highlight 2>/dev/null; then
+      out=$(highlight \
+              --out-format=ansi \
+              --line-range="${start}-${end}" \
+              --line-numbers \
+              --force \
+              "$file")
+    else
+      out=$(sed -n "${start},${end}p" < "$file")
     fi
+    echo "$out"
+  fi
 }
 
 main() {
