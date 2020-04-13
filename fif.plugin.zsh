@@ -20,13 +20,13 @@
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 _FIF_VERSION="0.1.0"
 
-export FIF_FZF_DEFAULT_OPTS="
+export FIF_FZF_OPTS="
 $FZF_DEFAULT_OPTS
 --ansi
 --bind='ctrl-s:toggle-sort'
 --bind='?:toggle-preview'
 --preview-window=up
-$FIF_FZF_DEFAULT_OPTS
+$FIF_FZF_OPTS
 "
 
 # Setup default grep opts
@@ -75,11 +75,11 @@ fif::cat_cmd() {
 }
 
 fif::fzf_file() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
 }
 
 fif::fzf_directory() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_DEFAULT_OPTS" fzf -d "\:" --nth "3.." --preview="$CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --nth "3.." --preview="$CURRENT_DIR/preview.sh {}"
 }
 
 # Check if supported version of dependencies are installed, warn otherwise.
