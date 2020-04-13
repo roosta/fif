@@ -12,3 +12,4 @@
 * TODO Help cmd
 * TODO Add line hl to highlight cmd
 * TODO Add commandline options overrides for highlighting commands
+* TODO Finish logo
