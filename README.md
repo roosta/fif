@@ -108,12 +108,14 @@ my-alias ~/file.txt
 <summary><strong><code>FIF_FZF_DEFAULT_OPTS</code></strong></summary>
 
 Environment that contains the default options when using `fzf` via
-`fif`. By default fif uses these options:
+`fif`. Default is:
 ```
+export FIF_FZF_DEFAULT_OPTS="
 --ansi
 --bind='ctrl-s:toggle-sort'
 --bind='?:toggle-preview'
 --preview-window=up
+"
 ```
 in combination with what's defined in `FZF_DEFAULT_OPTS`. (No need to
 repeat the options already defined in FZF_DEFAULT_OPTS)
