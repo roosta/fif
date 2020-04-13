@@ -148,11 +148,11 @@ Check out the Environment section in the grep manual for an overview.
 </details>
 
 <details>
-<summary><strong><code>FIF_RG_DEFAULT_OPTS</code></strong></summary>
+<summary><strong><code>FIF_RG_OPTS</code></strong></summary>
 Environment variable storing an array of rg options. Defaults:
 
 ``` bash
-FIF_RG_DEFAULT_OPTS=(
+FIF_RG_OPTS=(
   --hidden
   --color always
   --colors 'match:none'

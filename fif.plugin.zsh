@@ -42,8 +42,8 @@ fi
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 # Check for rg default opts, or assign
-if [ ${#FIF_RG_DEFAULT_OPTS[@]} -eq 0 ]; then
-  FIF_RG_DEFAULT_OPTS=(
+if [ ${#FIF_RG_OPTS[@]} -eq 0 ]; then
+  FIF_RG_OPTS=(
     --hidden
     --color always
     --colors 'match:none'
@@ -66,7 +66,7 @@ fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
 
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
-    rg "${FIF_RG_DEFAULT_OPTS[@]}" --line-number --no-heading --with-filename "^" "$location"
+    rg "${FIF_RG_OPTS[@]}" --line-number --no-heading --with-filename "^" "$location"
   elif hash ag 2>/dev/null; then
     ag "${FIF_AG_DEFAULT_OPTS[@]}" --line-number --noheading --filename "^" "$location"
   else
