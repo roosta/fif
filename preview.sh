@@ -66,7 +66,7 @@ fif::preview() {
               --line-range "${start}:${end}" "$file")
     elif hash highlight 2>/dev/null; then
       out=$(highlight \
-              --out-format=ansi \
+              --out-format=xterm256 \
               --line-range="${start}-${end}" \
               --line-numbers \
               --force \
