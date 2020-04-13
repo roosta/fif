@@ -24,6 +24,15 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+fif::basic_hl() {
+  local file linum out context hl
+  file="$1"
+  linum="$2"
+  hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' < "$file")
+  context=$(sed -n "${start},${end}p" <<< "$hl")
+  echo "$context"
+}
+
 fif::preview() {
   local file linum total half_lines start end total out
   match="$1"
@@ -53,7 +62,7 @@ fif::preview() {
               --force \
               "$file")
     else
-      out=$(sed -n "${start},${end}p" < "$file")
+      out=$(fif::basic_hl "$file" "$linum")
     fi
     echo "$out"
   fi
