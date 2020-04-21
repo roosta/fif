@@ -9,7 +9,7 @@
 * TODO Add help commandline arg
 * DONE Add cat fallback to pygmentize coloring when it doesn't understand the filetype
 * TODO Editor cmd
-* TODO Help cmd
 * TODO Add line hl to highlight cmd
 * TODO Add commandline options overrides for highlighting commands
-* TODO Finish logo
+* DONE Finish logo
+* TODO Demo
