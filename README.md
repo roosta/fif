@@ -142,8 +142,8 @@ repeat the options already defined in FZF_DEFAULT_OPTS)
 <summary><strong><code>FIF_GREP_OPTS</code></strong></summary>
 Environment variable storing an array of grep options. Default is:
 
-``` bash
-FIF_GREP_OPTS=(
+```bash
+export FIF_GREP_OPTS=(
   --color=always
   --exclude-dir={.git,.svn,CVS}
 )
@@ -154,8 +154,8 @@ FIF_GREP_OPTS=(
 <summary><strong><code>FIF_GREP_COLORS</code></strong></summary>
 Colors used with grep, default is:
 
-``` bash
-FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
+```bash
+export FIF_GREP_COLORS="mt=97:ln=33:fn=34:se=37"
 ```
 This will color filenames(fn) with blue, line number(ln) as yellow,
 line contents(mt) as bright white, and separators(se) as white
@@ -167,8 +167,8 @@ Check out the Environment section in the grep manual for an overview.
 <summary><strong><code>FIF_RG_OPTS</code></strong></summary>
 Environment variable storing an array of rg options. Defaults:
 
-``` bash
-FIF_RG_OPTS=(
+```bash
+export FIF_RG_OPTS=(
   --hidden
   --color always
   --colors 'match:none'
@@ -182,8 +182,8 @@ FIF_RG_OPTS=(
 <summary><strong><code>FIF_AG_OPTS</code></strong></summary>
 Environment variable storing an array of ag options. Defaults:
 
-``` bash
-FIF_AG_DEFAULT_OPTS=(
+```bash
+export FIF_AG_DEFAULT_OPTS=(
   --hidden
   --color
   --color-path 34
