@@ -1,8 +1,20 @@
-fif: find in files
-============
+<p align="center">
+  <img height="300" src="https://raw.githubusercontent.com/roosta/fif/master/fif.svg?sanitize=true">
+</p>
 
-Quickly find text in files using fuzzy searching, and a syntax
-highlighted preview with a surrounding context.
+<p align="center">
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">
+    <img alt="GitHub" src="https://img.shields.io/github/license/roosta/fif?color=%23f76262">
+  </a>
+  <a href="https://github.com/roosta/fif/releases">
+    <img src="https://img.shields.io/github/v/tag/roosta/fif?color=%23216583&label=version&sort=semver">
+  </a>
+</p>
+
+<p align="center">
+  Quickly find text in files using fuzzy searching, and a syntax
+  highlighted preview with a surrounding context.
+</p>
 
 ## Requirements
 
