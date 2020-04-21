@@ -125,7 +125,7 @@ my-alias ~/file.txt
 
 Environment that contains the default options when using `fzf` via
 `fif`. Default is:
-```
+```bash
 export FIF_FZF_OPTS="
 --ansi
 --bind='ctrl-s:toggle-sort'
