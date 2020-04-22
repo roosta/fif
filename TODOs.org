@@ -14,3 +14,4 @@
 * DONE Finish logo
 * TODO Demo
 * TODO Highlight query
+* TODO Add linting as a commit action CI
