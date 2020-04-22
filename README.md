@@ -20,7 +20,7 @@
 ## Requirements
 
 [fzf](https://github.com/junegunn/fzf) version
-[0.18.0](https://github.com/junegunn/fzf/releases/tag/0.18.0)
+[0.18.0](https://github.com/junegunn/fzf/releases/tag/0.18.0) or above.
 
 ## Optional
 
