@@ -13,3 +13,4 @@
 * TODO Add commandline options overrides for highlighting commands
 * DONE Finish logo
 * TODO Demo
+* TODO Highlight query
