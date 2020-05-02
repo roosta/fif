@@ -20,6 +20,8 @@
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 _FIF_VERSION="0.1.0"
 
+export FIF_EDITOR_SCRIPT="${FIF_EDITOR_SCRIPT:-$CURRENT_DIR/editor.sh}"
+
 export FIF_FZF_OPTS="
 $FZF_DEFAULT_OPTS
 --ansi
@@ -120,19 +122,19 @@ fif::find_in_files() {
     match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
       linum=$(echo "$match" | cut -d':' -f2) &&
       file=$(echo "$match" | cut -d':' -f1) &&
-      "$CURRENT_DIR/editor.sh" "$linum" "$file"
+      eval "$FIF_EDITOR_SCRIPT" "$linum" "$file"
 
   elif [ -f "$1" ]; then
     location="$1"
     match=$(fif::cat_cmd "$location" | fif::fzf_file) &&
       linum=$(echo "$match" | cut -d':' -f1) &&
-      "$CURRENT_DIR/editor.sh" "$linum" "$file"
+      eval "$FIF_EDITOR_SCRIPT" "$linum" "$file"
   else
     location="."
     match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
       linum=$(echo "$match" | cut -d':' -f2) &&
       file=$(echo "$match" | cut -d':' -f1) &&
-      "$CURRENT_DIR/editor.sh" "$linum" "$file"
+      eval "$FIF_EDITOR_SCRIPT" "$linum" "$file"
   fi
 }
 
