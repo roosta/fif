@@ -26,7 +26,7 @@ export FIF_FZF_OPTS="
 $FZF_DEFAULT_OPTS
 --ansi
 --bind='ctrl-s:toggle-sort'
---bind='?:toggle-preview'
+--bind='ctrl-p:toggle-preview'
 --preview-window=up
 $FIF_FZF_OPTS
 "
