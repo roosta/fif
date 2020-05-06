@@ -117,8 +117,31 @@ my-alias ~/file.txt
 </details>
 
 <details>
-<summary><strong><code>FIF_EDITOR_CMD</code></strong></summary>
-    tmptmptmp
+<summary><strong><code>FIF_EDITOR_SCRIPT</code></strong></summary>
+
+By default fif tries to use `$EDITOR` (see
+[editor.sh](https://github.com/roosta/fif/blob/master/editor.sh)) to
+open a given file, but since different editors have different syntax
+this variable exist to help setting up a custom editor. fif works out
+of the box with Vim and Emacs but say I wanted to use visual studio
+code.
+
+First you need to create a script file that takes two arguments. The
+first argument is the line number of the selected match, the second is
+the file that is to be opened.
+
+So a custom editor script for visual studio code would look like this:
+
+```bash
+code --goto "${2}:${1}"
+```
+
+Save the file somewhere and point the `FIF_EDITOR_SCRIPT` variable to said file.
+
+```bash
+export FIF_EDITOR_SCRIPT="~/my-editor-script.sh"
+```
+
 </details>
 
 <details>
