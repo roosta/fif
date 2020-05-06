@@ -8,10 +8,11 @@
 * TODO add query arg
 * TODO Add help commandline arg
 * DONE Add cat fallback to pygmentize coloring when it doesn't understand the filetype
-* TODO Editor cmd
-* TODO Add line hl to highlight cmd
+* DONE Editor cmd
+* DONE Add line hl to highlight cmd
 * TODO Add commandline options overrides for highlighting commands
 * DONE Finish logo
 * TODO Demo
 * TODO Highlight query
 * TODO Add linting as a commit action CI
+* TODO Fix issue where searching a single line file not displaying preview
