@@ -121,7 +121,7 @@ my-alias ~/file.txt
 
 By default fif tries to use `$EDITOR` (see
 [editor.sh](https://github.com/roosta/fif/blob/master/editor.sh)) to
-open a given file, but since different editors have different syntax
+open a given file, but since different editors have different syntax,
 this variable exist to help setting up a custom editor. fif works out
 of the box with Vim and Emacs but say I wanted to use visual studio
 code.
