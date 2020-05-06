@@ -100,7 +100,7 @@ fif ~/some-file.txt
   | ---------         | -------------------------------- |
   | <kbd>Enter</kbd>  | Confirm and open file location   |
   | <kbd>Ctrl-s</kbd> | Toggle sort                      |
-  | <kbd>?</kbd>      | Toggle preview                   |
+  | <kbd>Ctrl-p</kbd> | Toggle preview                   |
 
 ### Options
 
@@ -153,7 +153,7 @@ Environment that contains the default options when using `fzf` via
 export FIF_FZF_OPTS="
 --ansi
 --bind='ctrl-s:toggle-sort'
---bind='?:toggle-preview'
+--bind='ctrl-p:toggle-preview'
 --preview-window=up
 "
 ```
