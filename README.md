@@ -22,9 +22,9 @@
 [fzf](https://github.com/junegunn/fzf) version
 [0.18.0](https://github.com/junegunn/fzf/releases/tag/0.18.0) or above.
 
-## Optional
+### Optional
 
-### Concatenation
+#### Concatenation
 
 For file concatenation either
 [rg](https://github.com/BurntSushi/ripgrep) or
@@ -35,7 +35,7 @@ recommend using [rg](https://github.com/BurntSushi/ripgrep) or
 respect things like git ignore and hidden files. Most options passed to
 these tools are configurable. [More on that below](#configuration).
 
-### Preview
+#### Preview
 
 [bat](https://github.com/sharkdp/bat) version
 [0.10.0](https://github.com/sharkdp/bat/releases/tag/v0.10.0) or above
@@ -48,22 +48,21 @@ recommend `bat`, as its fast and does a good job highlighting
 
 ## Installation
 
-ZSH Plugin manager
-------------------
+### ZSH Plugin manager
 
-### [zplug](https://github.com/zplug/zplug)
+#### [zplug](https://github.com/zplug/zplug)
 
 ```bash
 zplug 'roosta/fif'
 ```
 
-### [zgen](https://github.com/tarjoilija/zgen)
+#### [zgen](https://github.com/tarjoilija/zgen)
 
 ```bash
 zgen load 'roosta/fif'
 ```
 
-### [Antigen](https://github.com/zsh-users/antigen)
+#### [Antigen](https://github.com/zsh-users/antigen)
 
 ```bash
 antigen bundle 'roosta/fif'
@@ -141,6 +140,8 @@ Save the file somewhere and point the `FIF_EDITOR_SCRIPT` variable to said file.
 ```bash
 export FIF_EDITOR_SCRIPT="~/my-editor-script.sh"
 ```
+
+Remember to set execute permissions for the script.
 
 </details>
 
