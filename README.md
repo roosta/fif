@@ -123,11 +123,11 @@ By default fif tries to use `$EDITOR` (see
 open a given file, but since different editors have different syntax,
 this variable exist to help setting up a custom editor. fif works out
 of the box with Vim and Emacs but say I wanted to use visual studio
-code.
+code:
 
-First you need to create a script file that takes two arguments. The
-first argument is the line number of the selected match, the second is
-the file that is to be opened.
+First create a script file that takes two arguments. The first
+argument is the line number of the selected match, the second is the
+file that is to be opened.
 
 So a custom editor script for visual studio code would look like this:
 
