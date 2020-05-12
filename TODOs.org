@@ -16,3 +16,5 @@
 * TODO Highlight query
 * TODO Add linting as a commit action CI
 * TODO Fix issue where searching a single line file not displaying preview
+* TODO Fix issue in where file wouldn't be opened
+  Run fif in Javascript30 folder and search for 'fetch'
