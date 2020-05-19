@@ -18,7 +18,7 @@
 # ====================================
 
 CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-_FIF_VERSION="0.1.0"
+_FIF_VERSION="0.1"
 
 export FIF_EDITOR_SCRIPT="${FIF_EDITOR_SCRIPT:-$CURRENT_DIR/editor.sh}"
 
