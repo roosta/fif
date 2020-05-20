@@ -109,7 +109,7 @@ fif::check_supported() {
     supported_version_only_digits=$(echo "$supported_version" | tr -dC '[:digit:]')
     if [ "$version_only_digits" -lt "$supported_version_only_digits" ]; then
       fif::warn "fif: Unsupported bat version ($version), upgrade to $supported_version or higher";
-      return 1
+      # return 1
     fi
   fi
 }
