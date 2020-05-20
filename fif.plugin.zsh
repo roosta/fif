@@ -17,10 +17,10 @@
 
 # ====================================
 
-CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+FIF_CURRENT_DIR=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 _FIF_VERSION="0.1"
 
-export FIF_EDITOR_SCRIPT="${FIF_EDITOR_SCRIPT:-$CURRENT_DIR/editor.sh}"
+export FIF_EDITOR_SCRIPT="${FIF_EDITOR_SCRIPT:-$FIF_CURRENT_DIR/editor.sh}"
 
 export FIF_FZF_OPTS="
 $FZF_DEFAULT_OPTS
@@ -79,11 +79,11 @@ fif::cat_cmd() {
 }
 
 fif::fzf_file() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$FIF_CURRENT_DIR/preview.sh {}"
 }
 
 fif::fzf_directory() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --nth "3.." --preview="$CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --nth "3.." --preview="$FIF_CURRENT_DIR/preview.sh {}"
 }
 
 # Check if supported version of dependencies are installed, warn otherwise.
