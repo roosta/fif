@@ -19,3 +19,5 @@
 * TODO Fix issue in where file wouldn't be opened
   Run fif in Javascript30 folder and search for 'fetch'
 * TODO Add option to set concat program manually
+* Vim plugin
+** [[https://github.com/wvanlint/twf][wvanlint/twf: Standalone tree view file explorer, inspired by fzf.]]
