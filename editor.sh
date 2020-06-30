@@ -1,1 +1,1 @@
-eval "${EDITOR:-vim}" "+${1}" "$2"
+"${EDITOR:-vim}" "+${1}" "$2"
