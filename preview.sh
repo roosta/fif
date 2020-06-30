@@ -43,6 +43,20 @@ fif::pygmentize() {
   echo "$context"
 }
 
+fif::bat() {
+  local file linum start end
+  file="$1"
+  linum="$2"
+  start="$3"
+  end="$4"
+  color=$(bat \
+    --number \
+    --color=always \
+    --highlight-line "$linum" \
+    --line-range "${start}:${end}" "$file")
+  echo "$color"
+}
+
 fif::preview() {
   local file linum total half_lines start end total out
   match="$1"
@@ -59,11 +73,7 @@ fif::preview() {
     [[ $start -eq 1 &&  $end -ne $total ]] && end=$FZF_PREVIEW_LINES
 
     if hash bat 2>/dev/null; then
-      out=$(bat \
-              --number \
-              --color=always \
-              --highlight-line "$linum" \
-              --line-range "${start}:${end}" "$file")
+      out=$(fif::bat "$file" "$linum" "$start" "$end")
     elif hash highlight 2>/dev/null; then
       out=$(highlight \
               --out-format=xterm256 \
