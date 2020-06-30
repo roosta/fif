@@ -79,11 +79,11 @@ fif::cat_cmd() {
 }
 
 fif::fzf_file() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$FIF_CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --with-nth "2.." --nth "2.." --preview="$FIF_CURRENT_DIR/preview.sh {q} {}"
 }
 
 fif::fzf_directory() {
-  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --nth "3.." --preview="$FIF_CURRENT_DIR/preview.sh {}"
+  FZF_DEFAULT_OPTS="$FIF_FZF_OPTS" fzf -d "\:" --nth "3.." --preview="$FIF_CURRENT_DIR/preview.sh {q} {}"
 }
 
 # Check if supported version of dependencies are installed, warn otherwise.
