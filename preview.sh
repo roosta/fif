@@ -24,21 +24,32 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+fif::highlight_line() {
+  local content linum
+  content="$1"
+  linum="$2"
+  hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' <<< "$content")
+  echo "$hl"
+}
+
 fif::basic_hl() {
   local file linum context hl
   file="$1"
   linum="$2"
-  hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' < "$file")
+  content=$(cat "$file")
+  hl=$(fif::highlight_line "$content" "$linum")
   context=$(sed -n "${start},${end}p" <<< "$hl")
   echo "$context"
 }
 
 fif::pygmentize() {
-  local file linum context hl
+  local file linum context hl start end
   file="$1"
   linum="$2"
+  start="$3"
+  end="$4"
   color=$(pygmentize -g "$file")
-  hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' <<< "$color")
+  hl=$(fif::highlight_line "$color" "$linum")
   context=$(sed -n "${start},${end}p" <<< "$hl")
   echo "$context"
 }
@@ -82,7 +93,7 @@ fif::preview() {
               --force \
               "$file")
     elif hash pygmentize 2>/dev/null; then
-      out=$(fif::pygmentize "$file" "$linum")
+      out=$(fif::pygmentize "$file" "$linum" "$start" "$end")
     else
       out=$(fif::basic_hl "$file" "$linum")
     fi
