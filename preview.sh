@@ -54,6 +54,20 @@ fif::pygmentize() {
   echo "$context"
 }
 
+fif::highlight() {
+  local file linum context hl start end
+  file="$1"
+  linum="$2"
+  start="$3"
+  end="$4"
+  color=$(highlight \
+    --out-format=ansi \
+    --line-range="${start}-${end}" \
+    --force \
+    "$file")
+  echo "$color"
+}
+
 fif::bat() {
   local file linum start end
   file="$1"
@@ -87,12 +101,7 @@ fif::preview() {
     if hash bat 2>/dev/null; then
       out=$(fif::bat "$file" "$linum" "$start" "$end")
     elif hash highlight 2>/dev/null; then
-      out=$(highlight \
-              --out-format=xterm256 \
-              --line-range="${start}-${end}" \
-              --line-numbers \
-              --force \
-              "$file")
+      out=$(fif::highlight "$file" "$linum" "$start" "$end")
     elif hash pygmentize 2>/dev/null; then
       out=$(fif::pygmentize "$file" "$linum" "$start" "$end")
     else
