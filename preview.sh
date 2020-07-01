@@ -33,9 +33,11 @@ fif::highlight_line() {
 }
 
 fif::basic_hl() {
-  local file linum context hl
+  local file linum context hl start end
   file="$1"
   linum="$2"
+  start="$3"
+  end="$4"
   content=$(cat "$file")
   hl=$(fif::highlight_line "$content" "$linum")
   context=$(sed -n "${start},${end}p" <<< "$hl")
