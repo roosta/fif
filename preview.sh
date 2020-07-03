@@ -24,6 +24,21 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+
+fif::highlight_query() {
+  local file linum query
+  file="$1"
+  linum="$2"
+  query="$3"
+  awk -v linum="$linum" -v query="$query" ' {
+    if (NR==linum && query != "") {
+      gsub(query, "\033[7m" query "\033[0m", $0)
+      print $0
+    } else { print $0 }
+  }
+  ' < "$file"
+}
+
 fif::highlight_line() {
   local content linum
   content="$1"
@@ -33,15 +48,14 @@ fif::highlight_line() {
 }
 
 fif::basic_hl() {
-  local file linum context hl start end
+  local file linum hl start end query
   file="$1"
   linum="$2"
   start="$3"
   end="$4"
-  content=$(cat "$file")
-  hl=$(fif::highlight_line "$content" "$linum")
-  context=$(sed -n "${start},${end}p" <<< "$hl")
-  echo "$context"
+  query="$5"
+  hl=$(fif::highlight_query "$file" "$linum" "$query")
+  sed -n "${start},${end}p" <<< "$hl"
 }
 
 fif::pygmentize() {
@@ -104,7 +118,7 @@ fif::preview() {
     elif hash pygmentize 2>/dev/null; then
       out=$(fif::pygmentize "$file" "$linum" "$start" "$end")
     else
-      out=$(fif::basic_hl "$file" "$linum")
+      out=$(fif::basic_hl "$file" "$linum" "$start" "$end" "$query")
     fi
     echo "$out"
   fi
