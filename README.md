@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  Fif is a shell utility to quickly find text in files using fuzzy
+  fif is a shell utility to quickly find text in files using fuzzy
   searching, and a syntax highlighted preview with a surrounding
   context.
   </p>
