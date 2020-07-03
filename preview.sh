@@ -45,29 +45,27 @@ fif::basic_hl() {
 }
 
 fif::pygmentize() {
-  local file linum context hl start end
+  local file linum hl start end
   file="$1"
   linum="$2"
   start="$3"
   end="$4"
   color=$(pygmentize -g "$file")
   hl=$(fif::highlight_line "$color" "$linum")
-  context=$(sed -n "${start},${end}p" <<< "$hl")
-  echo "$context"
+  sed -n "${start},${end}p" <<< "$hl"
 }
 
 fif::highlight() {
-  local file linum context hl start end
+  local file linum hl start end
   file="$1"
   linum="$2"
   start="$3"
   end="$4"
-  color=$(highlight \
+  highlight \
     --out-format=ansi \
     --line-range="${start}-${end}" \
     --force \
-    "$file")
-  echo "$color"
+    "$file"
 }
 
 fif::bat() {
@@ -76,12 +74,11 @@ fif::bat() {
   linum="$2"
   start="$3"
   end="$4"
-  color=$(bat \
+  bat \
     --number \
     --color=always \
     --highlight-line "$linum" \
-    --line-range "${start}:${end}" "$file")
-  echo "$color"
+    --line-range "${start}:${end}" "$file"
 }
 
 fif::preview() {
