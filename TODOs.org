@@ -25,3 +25,4 @@
 ** [[https://github.com/sharkdp/bat/issues/388][Parameter or flag to scroll to certain line number · Issue #388 · sharkdp/bat]]
 ** TODO Escape for xgray background
   hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[48;5;236m" $0 "\033[0m"} else {print $0}}' <<< "$content")
+* TODO Update social preview
