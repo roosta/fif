@@ -96,9 +96,8 @@ fif::bat() {
 }
 
 fif::preview() {
-  local file linum total half_lines start end total out query
-  query="$1"
-  match="$2"
+  local file linum total half_lines start end total out
+  match="$1"
   file=$(echo "$match" | cut -d':' -f1)
   linum=$(echo "$match" | cut -d':' -f2)
   if [ -f "$file" ]; then
@@ -125,8 +124,8 @@ fif::preview() {
 }
 
 main() {
-  if [ "$#" != "2" ]; then
-    echo "preview.sh takes exactly two arguments" >&2;
+  if [ "$#" != "1" ]; then
+    echo "preview.sh takes exactly one argument" >&2;
     exit 1;
   else
     fif::preview "$@"
