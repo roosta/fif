@@ -28,8 +28,12 @@ fif::highlight_line() {
   local content linum
   content="$1"
   linum="$2"
-  hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[7m" $0 "\033[0m"} else {print $0}}' <<< "$content")
-  echo "$hl"
+  awk -v linum="$linum" ' {
+    if (NR==linum) {
+      print "\033[7m" $0 "\033[0m"
+    } else { print $0 }
+  }
+  ' <<< "$content"
 }
 
 fif::basic_hl() {
