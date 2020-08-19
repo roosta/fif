@@ -27,4 +27,5 @@
   hl=$(awk -v linum="$linum" '{if (NR==linum) {print "\033[48;5;236m" $0 "\033[0m"} else {print $0}}' <<< "$content")
 * DONE Update social preview
 * TODO Fix preview overflow
+* TODO cat and highlight program customizable
 * TODO Follow symlinks
