@@ -103,7 +103,7 @@ fif::preview() {
     elif hash pygmentize 2>/dev/null; then
       out=$(fif::pygmentize "$file" "$linum" "$start" "$end")
     else
-      out=$(fif::basic_hl "$file" "$linum")
+      out=$(fif::basic_hl "$file" "$linum" "$start" "$end")
     fi
     echo "$out"
   fi
