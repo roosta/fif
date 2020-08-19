@@ -24,13 +24,16 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+REVERSE="\x1b[7m"
+RESET="\x1b[m"
+
 fif::highlight_line() {
   local content linum
   content="$1"
   linum="$2"
-  awk -v linum="$linum" ' {
+  awk -v linum="$linum" -v REVERSE="$REVERSE" -v RESET="$RESET" ' {
     if (NR==linum) {
-      print "\033[7m" $0 "\033[0m"
+      print REVERSE $0 RESET
     } else { print $0 }
   }
   ' <<< "$content"
