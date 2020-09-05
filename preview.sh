@@ -67,11 +67,9 @@ fif::highlight() {
   linum="$2"
   start="$3"
   end="$4"
-  highlight \
-    --out-format=ansi \
-    --line-range="${start}-${end}" \
-    --force \
-    "$file"
+  color=$(highlight --out-format=ansi --force "$file")
+  hl=$(fif::highlight_line "$color" "$linum")
+  sed -n "${start},${end}p" <<< "$hl"
 }
 
 fif::bat() {
