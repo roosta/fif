@@ -51,6 +51,7 @@ if [ ${#FIF_RG_OPTS[@]} -eq 0 ]; then
     --colors 'match:none'
     --colors 'path:fg:blue'
     --colors 'line:fg:yellow'
+    --follow
   )
 fi
 
@@ -61,6 +62,7 @@ if [ ${#FIF_AG_OPTS[@]} -eq 0 ]; then
     --color-path 34
     --color-match 97
     --color-line-number 33
+    --follow
   )
 fi
 
