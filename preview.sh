@@ -27,16 +27,16 @@ IFS=$'\n\t'
 REVERSE="\x1b[7m"
 RESET="\x1b[m"
 
+# https://github.com/junegunn/fzf.vim/blob/18205e071dc701ed9ca51971466b9997cd3d0778/bin/preview.sh#L54
 fif::highlight_line() {
   local content linum
   content="$1"
   linum="$2"
-  awk -v linum="$linum" -v REVERSE="$REVERSE" -v RESET="$RESET" ' {
-    if (NR==linum) {
-      print REVERSE $0 RESET
-    } else { print $0 }
-  }
-  ' <<< "$content"
+  awk "{ \
+    if (NR == $linum) \
+      { gsub(/\x1b[[0-9;]*m/, \"&$REVERSE\"); printf(\"$REVERSE%s\n$RESET\", \$0); } \
+      else printf(\"$RESET%s\n\", \$0); \
+      }" <<< "$content"
 }
 
 fif::basic_hl() {
