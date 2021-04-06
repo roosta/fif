@@ -32,38 +32,31 @@ $FIF_FZF_OPTS
 "
 
 # Setup default grep opts
-if [ ${#FIF_GREP_OPTS[@]} -eq 0 ]; then
-  # shellcheck disable=SC2191
-  FIF_GREP_OPTS=(
-    --color=always
-    --exclude-dir={.git,.svn,CVS}
-  )
+if [ -z $FIF_GREP_OPTS ]; then
+  FIF_GREP_OPTS="--color=always \
+    --exclude-dir={.git,.svn,CVS}"
 fi
 
 # Check out the Environment section in the grep manual for an overview
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 # Check for rg default opts, or assign
-if [ ${#FIF_RG_OPTS[@]} -eq 0 ]; then
-  FIF_RG_OPTS=(
-    --hidden
-    --color always
-    --colors 'match:none'
-    --colors 'path:fg:blue'
-    --colors 'line:fg:yellow'
-    --follow
-  )
+if [ -z $FIF_RG_OPTS ]; then
+  FIF_RG_OPTS="--hidden \
+    --color always \
+    --colors=match:none \
+    --colors=path:fg:blue \
+    --colors=line:fg:yellow \
+    --follow"
 fi
 
-if [ ${#FIF_AG_OPTS[@]} -eq 0 ]; then
-  FIF_AG_OPTS=(
-    --hidden
-    --color
-    --color-path 34
-    --color-match 97
-    --color-line-number 33
-    --follow
-  )
+if [ -z $FIF_AG_OPTS ]; then
+  FIF_AG_OPTS="--hidden \
+    --color \
+    --color-path 34 \
+    --color-match 97 \
+    --color-line-number 33 \
+    --follow"
 fi
 
 # https://github.com/wfxr/forgit/blob/4eb0832e535082c36a1e07de2570d3385fb4f6fb/forgit.plugin.zsh#L2
@@ -72,11 +65,11 @@ fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
 
 fif::cat_cmd() {
   if hash rg 2>/dev/null; then
-    rg "${FIF_RG_OPTS[@]}" --line-number --no-heading --with-filename "^" "$location"
+    eval "rg $FIF_RG_OPTS --line-number --no-heading --with-filename '^' $location"
   elif hash ag 2>/dev/null; then
-    ag "${FIF_AG_OPTS[@]}" --line-number --noheading --filename "^" "$location"
+    eval "ag $FIF_AG_OPTS --line-number --noheading --filename '^' $location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS grep "${FIF_GREP_OPTS[@]}" --recursive --line-number --with-filename "^" "$location"
+    GREP_COLORS=$FIF_GREP_COLORS eval "grep $FIF_GREP_OPTS --recursive --line-number --with-filename '^' $location"
   fi
 }
 
