@@ -168,10 +168,15 @@ repeat the options already defined in FZF_DEFAULT_OPTS)
 Environment variable storing an array of grep options. Default is:
 
 ```bash
-export FIF_GREP_OPTS=(
-  --color=always
-  --exclude-dir={.git,.svn,CVS}
-)
+# Single line
+export FIF_GREP_OPTS="--color=always --exclude-dir={.git,.svn,CVS}"
+
+# Multiline
+export FIF_GREP_OPTS="\
+  --color=always \
+  --exclude-dir={.git,.svn,CVS} \
+  "
+
 ```
 </details>
 
@@ -193,13 +198,18 @@ Check out the Environment section in the grep manual for an overview.
 Environment variable storing an array of rg options. Defaults:
 
 ```bash
-export FIF_RG_OPTS=(
-  --hidden
-  --color always
-  --colors 'match:none'
-  --colors 'path:fg:blue'
-  --colors 'line:fg:yellow'
-)
+# Single line
+export FIF_RG_OPTS="--hidden --color always --colors=match:none --colors=path:fg:blue --colors=line:fg:yellow --follow"
+
+# Multiline
+export FIF_RG_OPTS="\
+  --hidden \
+  --color always \
+  --colors=match:none \
+  --colors=path:fg:blue \
+  --colors=line:fg:yellow \
+  --follow \
+  "
 ```
 </details>
 
@@ -208,14 +218,20 @@ export FIF_RG_OPTS=(
 Environment variable storing an array of ag options. Defaults:
 
 ```bash
-export FIF_AG_DEFAULT_OPTS=(
-  --hidden
-  --color
-  --color-path 34
-  --color-match 97
-  --color-line-number 33
-)
 
+# Multiline
+export FIF_AG_OPTS="\
+  --hidden \
+  --color \
+  --color-path 34 \
+  --color-match 97 \
+  --color-line-number 33 \
+  --follow \
+  "
+
+# Single line
+
+export FIF_AG_OPTS="--hidden --color --color-path 34 --color-match 97 --color-line-number 33 --follow"
 ```
 
 Colors used are blue for path, bright white for match, and yellow line
