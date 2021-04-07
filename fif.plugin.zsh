@@ -32,7 +32,7 @@ $FIF_FZF_OPTS
 "
 
 # Setup default grep opts
-if [ -z $FIF_GREP_OPTS ]; then
+if [ -z "$FIF_GREP_OPTS" ]; then
   FIF_GREP_OPTS="\
     --color=always \
     --exclude-dir={.git,.svn,CVS} \
@@ -43,7 +43,7 @@ fi
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 # Check for rg default opts, or assign
-if [ -z $FIF_RG_OPTS ]; then
+if [ -z "$FIF_RG_OPTS" ]; then
   FIF_RG_OPTS="\
     --hidden \
     --color always \
@@ -54,7 +54,7 @@ if [ -z $FIF_RG_OPTS ]; then
     "
 fi
 
-if [ -z $FIF_AG_OPTS ]; then
+if [ -z "$FIF_AG_OPTS" ]; then
   FIF_AG_OPTS="\
     --hidden \
     --color \
