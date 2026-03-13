@@ -1,6 +1,31 @@
 # Change log
 
 
+## [v0.3]
+
+- Fix broken escape sequences when searching some directories
+    - Fix issue trying to traverse broken links would break the terminal ANSI
+    - Remove `eval` calls as those also made it difficult to debug, and caused odd issues when fixing the above issue
+- Fix issue opening a line when passing a file to `fif`
+- Fix issue where opening a line with a newline literal would break the
+  argument parsing when calling editor script
+
+### Breaking change
+
+BREAKING:
+- Environment variables with embedded spaces need to be changed to the
+  array option, else fif now only splits on whitespace.
+
+  You can still use the environment variables, but it no longer supports
+  splitting on anything but spaces. If you need more control there is
+  now a few new options that can be set before sourcing the plugin:
+
+- fif_grep_opts
+- fif_rg_opts
+- fif_grep_opts
+
+See readme for details on each
+
 ## [v0.2]
 
 ### Breaking change
