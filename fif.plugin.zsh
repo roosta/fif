@@ -32,37 +32,41 @@ $FIF_FZF_OPTS
 "
 
 # Setup default grep opts
-if [ -z "$FIF_GREP_OPTS" ]; then
-  FIF_GREP_OPTS="\
-    --color=always \
-    --exclude-dir={.git,.svn,CVS} \
-    "
+if [[ -n "$FIF_GREP_OPTS" ]]; then
+  fif_grep_opts=(${=FIF_GREP_OPTS})
+else
+  fif_grep_opts=(
+    --color=always
+    --exclude-dir={.git,.svn,CVS}
+  )
 fi
 
 # Check out the Environment section in the grep manual for an overview
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 # Check for rg default opts, or assign
-if [ -z "$FIF_RG_OPTS" ]; then
-  FIF_RG_OPTS="\
-    --hidden \
-    --color always \
-    --colors=match:none \
-    --colors=path:fg:blue \
-    --colors=line:fg:yellow \
-    --follow \
-    "
+if [[ -n "$FIF_RG_OPTS" ]]; then
+  fif_rg_opts=(${=FIF_RG_OPTS})
+else
+  fif_rg_opts=(
+    --hidden
+    --color always
+    --colors=match:none
+    --colors=path:fg:blue
+    --colors=line:fg:yellow
+  )
 fi
 
-if [ -z "$FIF_AG_OPTS" ]; then
-  FIF_AG_OPTS="\
-    --hidden \
-    --color \
-    --color-path 34 \
-    --color-match 97 \
-    --color-line-number 33 \
-    --follow \
-    "
+if [[ -n "$FIF_AG_OPTS" ]]; then
+  fif_ag_opts=(${=FIF_AG_OPTS})
+else
+  fif_ag_opts=(
+    --hidden
+    --color
+    --color-path 34
+    --color-match 97
+    --color-line-number 33
+  )
 fi
 
 # https://github.com/wfxr/forgit/blob/4eb0832e535082c36a1e07de2570d3385fb4f6fb/forgit.plugin.zsh#L2
@@ -70,12 +74,13 @@ fif::warn() { printf "%b[Warn]%b %s\n" '\e[0;33m' '\e[0m' "$@" >&2; }
 fif::info() { printf "%b[Info]%b %s\n" '\e[0;32m' '\e[0m' "$@" >&2; }
 
 fif::cat_cmd() {
+  local location="$1"
   if hash rg 2>/dev/null; then
-    eval "rg $FIF_RG_OPTS --line-number --no-heading --with-filename '^' $location"
+    rg "${fif_rg_opts[@]}" --line-number --no-heading --with-filename '^' "$location"
   elif hash ag 2>/dev/null; then
-    eval "ag $FIF_AG_OPTS --line-number --noheading --filename '^' $location"
+    ag "${fif_ag_opts[@]}" --line-number --noheading --filename '^' "$location"
   else
-    GREP_COLORS=$FIF_GREP_COLORS eval "grep $FIF_GREP_OPTS --recursive --line-number --with-filename '^' $location"
+    GREP_COLORS=$FIF_GREP_COLORS grep "${fif_grep_opts[@]}" --recursive --line-number --with-filename '^' "$location"
   fi
 }
 

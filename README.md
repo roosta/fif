@@ -165,19 +165,20 @@ repeat the options already defined in FZF_DEFAULT_OPTS)
 
 <details>
 <summary><strong><code>FIF_GREP_OPTS</code></strong></summary>
-Environment variable storing an array of grep options. Default is:
+Options passed to `grep`. Can be set as a zsh array (preferred) or a plain string. Default is:
 
-```bash
-# Single line
+```zsh
+# Preferred: native zsh array, set before sourcing fif
+fif_grep_opts=(
+  --color=always
+  --exclude-dir={.git,.svn,CVS}
+)
+
+# Alternative: string, split by whitespace
 export FIF_GREP_OPTS="--color=always --exclude-dir={.git,.svn,CVS}"
-
-# Multiline
-export FIF_GREP_OPTS="\
-  --color=always \
-  --exclude-dir={.git,.svn,CVS} \
-  "
-
 ```
+
+> **Note:** Options containing embedded spaces must use the zsh array form.
 </details>
 
 <details>
@@ -195,48 +196,46 @@ Check out the Environment section in the grep manual for an overview.
 
 <details>
 <summary><strong><code>FIF_RG_OPTS</code></strong></summary>
-Environment variable storing an array of rg options. Defaults:
+Options passed to `rg`. Can be set as a zsh array (preferred) or a plain string. Default is:
 
-```bash
-# Single line
-export FIF_RG_OPTS="--hidden --color always --colors=match:none --colors=path:fg:blue --colors=line:fg:yellow --follow"
+```zsh
+# Preferred: native zsh array, set before sourcing fif
+fif_rg_opts=(
+  --hidden
+  --color always
+  --colors=match:none
+  --colors=path:fg:blue
+  --colors=line:fg:yellow
+)
 
-# Multiline
-export FIF_RG_OPTS="\
-  --hidden \
-  --color always \
-  --colors=match:none \
-  --colors=path:fg:blue \
-  --colors=line:fg:yellow \
-  --follow \
-  "
+# Alternative: string, split by whitespace
+export FIF_RG_OPTS="--hidden --color always --colors=match:none --colors=path:fg:blue --colors=line:fg:yellow"
 ```
+
+> **Note:** Options containing embedded spaces must use the zsh array form.
 </details>
 
 <details>
 <summary><strong><code>FIF_AG_OPTS</code></strong></summary>
-Environment variable storing an array of ag options. Defaults:
+Options passed to `ag`. Can be set as a zsh array (preferred) or a plain string. Default is:
 
-```bash
+```zsh
+# Preferred: native zsh array, set before sourcing fif
+fif_ag_opts=(
+  --hidden
+  --color
+  --color-path 34
+  --color-match 97
+  --color-line-number 33
+)
 
-# Multiline
-export FIF_AG_OPTS="\
-  --hidden \
-  --color \
-  --color-path 34 \
-  --color-match 97 \
-  --color-line-number 33 \
-  --follow \
-  "
-
-# Single line
-
-export FIF_AG_OPTS="--hidden --color --color-path 34 --color-match 97 --color-line-number 33 --follow"
+# Alternative: string, split by whitespace
+export FIF_AG_OPTS="--hidden --color --color-path 34 --color-match 97 --color-line-number 33"
 ```
 
-Colors used are blue for path, bright white for match, and yellow line
-number
+Colors used are blue for path, bright white for match, and yellow line number.
 
+> **Note:** Options containing embedded spaces must use the zsh array form.
 </details>
 
 ## Attribution
