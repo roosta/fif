@@ -128,8 +128,8 @@ fif::find_in_files() {
   elif [ -f "$1" ]; then
     location="$1"
     match=$(fif::cat_cmd "$location" | fif::fzf_file) &&
-      linum=$(echo "$match" | cut -d':' -f1) &&
-      "$FIF_EDITOR_SCRIPT" "$linum" "$file"
+      linum=$(echo "$match" | cut -d':' -f2) &&
+      "$FIF_EDITOR_SCRIPT" "$linum" "$location"
   else
     location="."
     match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
