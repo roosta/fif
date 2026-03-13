@@ -121,20 +121,24 @@ fif::find_in_files() {
   if [ -d "$1" ]; then
     location="$1"
     match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
-      linum=$(echo "$match" | cut -d':' -f2) &&
-      file=$(echo "$match" | cut -d':' -f1) &&
+      file="${match%%:*}" &&
+      rest="${match#*:}" &&
+      linum="${rest%%:*}" &&
       "$FIF_EDITOR_SCRIPT" "$linum" "$file"
 
   elif [ -f "$1" ]; then
     location="$1"
     match=$(fif::cat_cmd "$location" | fif::fzf_file) &&
-      linum=$(echo "$match" | cut -d':' -f2) &&
-      "$FIF_EDITOR_SCRIPT" "$linum" "$location"
+      file="${match%%:*}" &&
+      rest="${match#*:}" &&
+      linum="${rest%%:*}" &&
+      "$FIF_EDITOR_SCRIPT" "$linum" "$file"
   else
     location="."
     match=$(fif::cat_cmd "$location" | fif::fzf_directory) &&
-      linum=$(echo "$match" | cut -d':' -f2) &&
-      file=$(echo "$match" | cut -d':' -f1) &&
+      file="${match%%:*}" &&
+      rest="${match#*:}" &&
+      linum="${rest%%:*}" &&
       "$FIF_EDITOR_SCRIPT" "$linum" "$file"
   fi
 }
