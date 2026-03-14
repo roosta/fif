@@ -31,9 +31,19 @@ $FZF_DEFAULT_OPTS
 $FIF_FZF_OPTS
 "
 
+# reads options stored in environment variable
+# read needs different arguments depending on shell
+fif::read_opts() {
+  if [[ -n "$ZSH_VERSION" ]]; then
+    read -rA "$1" <<< "$2"
+  else
+    read -ra "$1" <<< "$2"
+  fi
+}
+
 if (( ${#fif_grep_opts[@]} == 0 )); then
   if [[ -n "$FIF_GREP_OPTS" ]]; then
-    fif_grep_opts=(${=FIF_GREP_OPTS})
+    fif::read_opts fif_grep_opts "$FIF_GREP_OPTS"
   else
     fif_grep_opts=(
       --color=always
@@ -47,7 +57,7 @@ export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
 if (( ${#fif_rg_opts[@]} == 0 )); then
   if [[ -n "$FIF_RG_OPTS" ]]; then
-    fif_rg_opts=(${=FIF_RG_OPTS})
+    fif::read_opts fif_rg_opts "$FIF_RG_OPTS"
   else
     fif_rg_opts=(
       --hidden
@@ -61,7 +71,7 @@ fi
 
 if (( ${#fif_ag_opts[@]} == 0 )); then
   if [[ -n "$FIF_AG_OPTS" ]]; then
-    fif_ag_opts=(${=FIF_AG_OPTS})
+    fif::read_opts fif_grep_opts "$FIF_GREP_OPTS"
   else
     fif_ag_opts=(
       --hidden
