@@ -31,42 +31,46 @@ $FZF_DEFAULT_OPTS
 $FIF_FZF_OPTS
 "
 
-# Setup default grep opts
-if [[ -n "$FIF_GREP_OPTS" ]]; then
-  fif_grep_opts=(${=FIF_GREP_OPTS})
-else
-  fif_grep_opts=(
-    --color=always
-    --exclude-dir={.git,.svn,CVS}
-  )
+if (( ${#fif_grep_opts[@]} == 0 )); then
+  if [[ -n "$FIF_GREP_OPTS" ]]; then
+    fif_grep_opts=(${=FIF_GREP_OPTS})
+  else
+    fif_grep_opts=(
+      --color=always
+      --exclude-dir={.git,.svn,CVS}
+    )
+  fi
 fi
 
 # Check out the Environment section in the grep manual for an overview
 export FIF_GREP_COLORS="${FIF_GREP_COLORS:-ln=33:fn=34:se=37}"
 
-# Check for rg default opts, or assign
-if [[ -n "$FIF_RG_OPTS" ]]; then
-  fif_rg_opts=(${=FIF_RG_OPTS})
-else
-  fif_rg_opts=(
-    --hidden
-    --color always
-    --colors=match:none
-    --colors=path:fg:blue
-    --colors=line:fg:yellow
-  )
+if (( ${#fif_rg_opts[@]} == 0 )); then
+  if [[ -n "$FIF_RG_OPTS" ]]; then
+    fif_rg_opts=(${=FIF_RG_OPTS})
+  else
+    fif_rg_opts=(
+      --hidden
+      --color always
+      --colors=match:none
+      --colors=path:fg:blue
+      --colors=line:fg:yellow
+    )
+  fi
 fi
 
-if [[ -n "$FIF_AG_OPTS" ]]; then
-  fif_ag_opts=(${=FIF_AG_OPTS})
-else
-  fif_ag_opts=(
-    --hidden
-    --color
-    --color-path 34
-    --color-match 97
-    --color-line-number 33
-  )
+if (( ${#fif_ag_opts[@]} == 0 )); then
+  if [[ -n "$FIF_AG_OPTS" ]]; then
+    fif_ag_opts=(${=FIF_AG_OPTS})
+  else
+    fif_ag_opts=(
+      --hidden
+      --color
+      --color-path 34
+      --color-match 97
+      --color-line-number 33
+    )
+  fi
 fi
 
 # https://github.com/wfxr/forgit/blob/4eb0832e535082c36a1e07de2570d3385fb4f6fb/forgit.plugin.zsh#L2
