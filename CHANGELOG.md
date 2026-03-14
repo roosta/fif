@@ -1,6 +1,12 @@
 # Change log
 
 
+## [v0.4]
+- Fix issue with source order and setting custom opts arrays, now correctly
+  sources user config before using the defaults
+- Fix issue with bash word-splitting, setting the environment variable using
+  word-splitting now works in bash as well
+
 ## [v0.3]
 
 - Fix broken escape sequences when searching some directories
@@ -64,3 +70,5 @@ Gotta be careful with the newline chars, it'll trip up `fif` if the backslash is
 - Add customization option for editor.sh `$FIF_EDITOR_SCRIPT`
 
 [v0.2]: https://github.com/roosta/fif/compare/v0.1...v0.2
+[v0.3]: https://github.com/roosta/fif/compare/v0.2...v0.3
+[v0.4]: https://github.com/roosta/fif/compare/v0.3...v0.4
