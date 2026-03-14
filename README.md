@@ -75,6 +75,8 @@ Clone this repository somewhere and source `fif.plugin.zsh` or
 
 ## Demonstration
 
+<video src="https://github.com/user-attachments/assets/5f3cf557-162a-43c7-abff-dfdd5fae900d" controls width="800"></video>
+
 ## Usage
 
 ```
